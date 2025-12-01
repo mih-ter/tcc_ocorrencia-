@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Ocorrência - Professor</title>
+  <link rel="stylesheet" href="../css/registrar-ocorrencias-professor.css">
+</head>
+<body class="tela-professor">
+
+  <div class="menu-container">
+    <div class="menu-card">
+      <h2>Registrar Ocorrência</h2>
+
+      <form id="ocorrenciaForm">
+
+        <!-- Seleção de Sala -->
+        <select id="sala" class="menu-input" required>
+          <option value="" disabled selected>Selecione uma sala</option>
+          <option value="2NT">2 NT</option>
+          <option value="3NT">3 NT</option>
+        </select>
+
+        <!-- Seleção de Aluno -->
+        <select id="aluno" class="menu-input" disabled required>
+          <option value="" disabled selected>Selecione uma sala primeiro</option>
+        </select>
+
+        <!-- Seleção do Tipo -->
+        <select id="tipo" class="menu-input" required>
+          <option value="" disabled selected>Selecione o tipo</option>
+          <option value="Por celular">Por celular</option>
+          <option value="Por comportamento">Por comportamento</option>
+        </select>
+
+        <!-- Data automática -->
+        <input type="date" id="data" class="menu-input" readonly>
+
+        <!-- Matéria -->
+        <input type="text" id="materia" class="menu-input" placeholder="Ex: Matemática, Português..." required>
+
+        <!-- Descrição -->
+        <textarea id="descricao" class="menu-input" rows="4" placeholder="Descreva a ocorrência..." required></textarea>
+
+        <!-- Botão Registrar -->
+        <button type="submit" class="menu-btn">Registrar</button>
+        <!-- Botão Voltar -->
+        <a href="menu-professor.html" class="menu-btn sair">← Voltar</a>
+
+      </form>
+
+      <p id="successMsg" class="success-msg"></p>
+    </div>
+  </div>
+
+  <script>
+    // Segurança: só professor pode acessar
+    const user = sessionStorage.getItem("usuario");
+    if (!user || JSON.parse(user).tipo !== "professor") {
+      window.location.href = "../index.html";
+    }
+
+    // Menu dependente: Sala -> Aluno
+    const salaSelect = document.getElementById('sala');
+    const alunoSelect = document.getElementById('aluno');
+
+    const alunosPorSala = {
+      "2NT": ["Pedro", "Tgas", "João"],
+      "3NT": ["Millena", "Murilo", "Gabi"]
+    };
+
+    salaSelect.addEventListener('change', function() {
+      const sala = salaSelect.value;
+      alunoSelect.innerHTML = '';
+      alunoSelect.disabled = false;
+
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '';
+      defaultOption.textContent = 'Selecione um aluno';
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      alunoSelect.appendChild(defaultOption);
+
+      alunosPorSala[sala].forEach(aluno => {
+        const option = document.createElement('option');
+        option.value = aluno;
+        option.textContent = aluno;
+        alunoSelect.appendChild(option);
+      });
+    });
+
+    // Data automática
+    const dataInput = document.getElementById('data');
+    function atualizarData() {
+      const hoje = new Date();
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      dataInput.value = `${ano}-${mes}-${dia}`;
+    }
+    atualizarData();
+    setInterval(atualizarData, 60000);
+
+    // Registrar ocorrência
+    const form = document.getElementById('ocorrenciaForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const sala = salaSelect.value;
+      const aluno = alunoSelect.value;
+      const tipo = document.getElementById('tipo').value;
+      const data = dataInput.value;
+      const materia = document.getElementById('materia').value;
+      const descricao = document.getElementById('descricao').value;
+
+      if (!sala || !aluno || !tipo || !materia || !descricao) {
+        alert('Preencha todos os campos!');
+        return;
+      }
+
+      console.log(`Sala: ${sala}, Aluno: ${aluno}, Tipo: ${tipo}, Data: ${data}, Matéria: ${materia}, Descrição: ${descricao}`);
+
+      successMsg.textContent = `Ocorrência registrada com sucesso para ${aluno} (${sala}) - ${tipo} em ${data}!`;
+      form.reset();
+      alunoSelect.disabled = true;
+      atualizarData();
+    });
+  </script>
+
+</body>
+</html>

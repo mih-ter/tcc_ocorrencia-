@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Suspensão - Diretor</title>
+  <link rel="stylesheet" href="../css/registrar-suspensao-diretor.css">
+</head>
+<body class="tela-professor">
+
+  <div class="menu-container">
+    <div class="menu-card">
+      <h2>Registrar Suspensão</h2>
+
+      <form id="suspensaoForm">
+
+        <!-- Sala -->
+        <select id="sala" class="menu-input" required>
+          <option value="" disabled selected>Selecione uma sala</option>
+          <option value="2NT">2 NT</option>
+          <option value="3NT">3 NT</option>
+        </select>
+
+        <!-- Aluno -->
+        <select id="aluno" class="menu-input" disabled required>
+          <option value="" disabled selected>Selecione uma sala primeiro</option>
+        </select>
+
+        <!-- Data automática -->
+        <input type="date" id="data" class="menu-input" readonly>
+
+        <!-- Dias de suspensão -->
+        <input type="number" id="dias" class="menu-input" min="1" max="10" placeholder="Quantidade de dias" required>
+
+        <!-- Motivo -->
+        <textarea id="motivo" class="menu-input" rows="4" placeholder="Motivo da suspensão..." required></textarea>
+
+        <!-- Botão Registrar -->
+        <button type="submit" class="menu-btn">Registrar</button>
+
+        <!-- Voltar -->
+        <a href="menu-diretor.html" class="menu-btn sair">← Voltar</a>
+
+      </form>
+
+      <p id="successMsg" class="success-msg"></p>
+    </div>
+  </div>
+
+
+  <script>
+    // Segurança: só diretor acessa
+    const user = sessionStorage.getItem("usuario");
+    if (!user || JSON.parse(user).tipo !== "diretor") {
+      window.location.href = "../index.html";
+    }
+
+    // Sala -> alunos
+    const salaSelect = document.getElementById('sala');
+    const alunoSelect = document.getElementById('aluno');
+
+    const alunosPorSala = {
+      "2NT": ["Pedro", "Tgas", "João"],
+      "3NT": ["Millena", "Murilo", "Gabi"]
+    };
+
+    salaSelect.addEventListener('change', function() {
+      const sala = salaSelect.value;
+      alunoSelect.innerHTML = '';
+      alunoSelect.disabled = false;
+
+      const option = document.createElement('option');
+      option.value = "";
+      option.textContent = "Selecione um aluno";
+      option.disabled = true;
+      option.selected = true;
+      alunoSelect.appendChild(option);
+
+      alunosPorSala[sala].forEach(a => {
+        const op = document.createElement('option');
+        op.value = a;
+        op.textContent = a;
+        alunoSelect.appendChild(op);
+      });
+    });
+
+    // Data automática
+    const dataInput = document.getElementById('data');
+    function atualizarData() {
+      const hoje = new Date();
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      dataInput.value = `${ano}-${mes}-${dia}`;
+    }
+    atualizarData();
+    setInterval(atualizarData, 60000);
+
+    // Registrar suspensão
+    const form = document.getElementById('suspensaoForm');
+    const msg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const sala = salaSelect.value;
+      const aluno = alunoSelect.value;
+      const dias = document.getElementById('dias').value;
+      const motivo = document.getElementById('motivo').value;
+      const data = dataInput.value;
+
+      if (!sala || !aluno || !dias || !motivo) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      msg.textContent = `Suspensão registrada para ${aluno} (${sala}) por ${dias} dias!`;
+      form.reset();
+      alunoSelect.disabled = true;
+      atualizarData();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Menu do Diretor</title>
+  <link rel="stylesheet" href="../css/menu-diretor.css">
+</head>
+<body class="menu-body">
+
+  <!-- Ícone / botão de sair no topo direito -->
+  <button class="logout-icon" id="logoutIcon" title="Sair">⎋</button>
+
+  <div class="menu-container">
+    <h1>Menu do Diretor</h1>
+
+    <div class="btn-group">
+      <a href="registrar-ocorrencia-diretor.html" class="menu-btn">Registrar Ocorrência</a>
+      <a href="ver-ocorrencias-suspensoes-diretor.html" class="menu-btn">Ver Ocorrências e Suspensão</a>
+      <a href="registrar-suspensao-diretor.html" class="menu-btn">Registrar Suspensão</a>
+      <a href="alunos-estrelas-diretor.html" class="menu-btn">Alunos Estrelas</a>
+    </div>
+
+    <!-- botão sair grande embaixo (opcional) -->
+    <a href="../index.html" class="menu-btn sair-btn">Sair</a>
+  </div>
+
+  <script>
+    // logout topo (apenas redireciona para index e limpa sessão)
+    document.getElementById('logoutIcon').addEventListener('click', function() {
+      sessionStorage.clear();
+      window.location.href = '../index.html';
+    });
+  </script>
+</body>
+</html>

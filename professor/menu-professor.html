@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Painel do Professor</title>
+  <link rel="stylesheet" href="../css/style-professor.css">
+</head>
+<body class="tela-professor">
+
+  <div class="menu-container">
+    <div class="menu-card">
+        <h2>Painel do Professor</h2>
+        <p>Selecione uma opção abaixo:</p>
+
+        <a href="registrar-ocorrencias-professor.html" class="menu-btn neutro">Registrar Ocorrência</a>
+        <a href="ver-ocorrencias-professor.html" class="menu-btn">Ver Ocorrências</a>
+        <a href="alunos-estrelas-professor.html" class="menu-btn">Alunos Estrelas</a>
+
+        <a href="../index.html" class="menu-btn sair">Sair</a>
+    </div>
+  </div>
+
+  <script>
+    const user = sessionStorage.getItem("usuario");
+    if (!user) {
+      window.location.href = "../index.html";
+    }
+  </script>
+
+</body>
+</html>

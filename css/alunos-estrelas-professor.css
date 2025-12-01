@@ -1,0 +1,110 @@
+/* Fundo da tela */
+body.tela-professor {
+  font-family: Arial, sans-serif;
+  background-color: #BEE6FF;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+.page-title {
+  margin-top: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #084475;
+  text-align: center;
+}
+
+/* Grid dos bimestres */
+.bimestres-grid {
+  width: 90%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 30px;
+}
+
+/* Card do bimestre */
+.bimestre-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Título do bimestre */
+.bimestre-section h2 {
+  color: #084475;
+  border-bottom: 2px solid #084475;
+  padding-bottom: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Área onde ficam os alunos */
+.mural-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+/* Card do aluno */
+.aluno-card {
+  background-color: #9EE8FF;
+  border-radius: 12px;
+  text-align: center;
+  width: 80px;
+  padding: 0.5rem;
+  transition: 0.2s;
+}
+
+/* Efeito ao passar o mouse */
+.aluno-card:hover {
+  transform: scale(1.1);
+  background-color: #BFF3FF;
+}
+
+/* Foto */
+.aluno-card img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid #084475;
+}
+
+/* Nome */
+.aluno-card h3 {
+  font-size: 0.75rem;
+  color: #084475;
+  margin: 3px 0 0 0;
+}
+
+/* Sala */
+.aluno-card p {
+  font-size: 0.65rem;
+  color: #444;
+  margin: 0;
+}
+
+/* Botão voltar */
+.btn-voltar {
+  display: block;
+  background-color: #ff4d4d;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  transition: 0.2s;
+}
+
+.btn-voltar:hover {
+  background-color: #cc0000;
+}

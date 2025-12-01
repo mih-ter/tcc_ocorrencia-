@@ -1,0 +1,88 @@
+/* reset padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+/* Fundo azul bebê */
+body.tela-professor {
+    background-color: #BEE6FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Card central */
+.menu-container {
+    width: 100%;
+    max-width: 520px;
+}
+
+.menu-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+/* Título */
+.menu-card h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Inputs */
+.menu-input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* Botões */
+.menu-btn {
+    width: 100%;
+    padding: 12px;
+    background: #3496e1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.menu-btn:hover {
+    background: #5eb8f7;
+    transform: scale(1.05);
+}
+
+/* Botão de voltar vermelho */
+.menu-btn.sair {
+    background: #e31111;
+}
+
+.menu-btn.sair:hover {
+    background: #d11111;
+}
+
+/* Sucesso */
+.success-msg {
+    margin-top: 10px;
+    color: green;
+    font-weight: bold;
+}

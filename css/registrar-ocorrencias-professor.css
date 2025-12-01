@@ -1,0 +1,122 @@
+/* reset básico */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+html, body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+/* Tela do professor */
+body.tela-professor {
+    background-color: #BEE6FF; /* azul bebê */
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* rolagem externa */
+}
+
+/* Contêiner do card */
+.menu-container {
+    width: 100%;
+    max-width: 520px; /* largura do card */
+    margin: 0 auto;
+}
+
+/* Card branco */
+.menu-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px 30px; 
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    min-height: auto;
+}
+
+/* Título do card */
+.menu-card h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    text-align: center;
+    margin-bottom: 15px; 
+}
+
+/* Inputs, selects e textarea */
+.menu-input {
+    width: 100%;
+    padding: 12px 14px; 
+    margin: 8px 0; 
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.menu-input[type="textarea"], textarea.menu-input {
+    resize: vertical;
+}
+
+/* Botões principais azul clarinho */
+.menu-btn {
+    width: 100%;
+    padding: 12px; 
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3496e1; /* azul clarinho */
+    color: white; /* texto branco */
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease; 
+}
+
+.menu-btn:hover {
+    background-color: #5eb8f7; /* azul mais forte no hover */
+    transform: scale(1.05);     
+}
+
+/* Botão de sair vermelho vivo */
+.menu-btn.sair {
+    background-color: #e31111; 
+    color: white;
+}
+
+.menu-btn.sair:hover {
+    background-color: #d11111;
+}
+
+/* Botão de voltar cinza claro */
+.menu-btn.voltar {
+    background-color: #d3d3d3; 
+    color: #333;
+}
+
+.menu-btn.voltar:hover {
+    background-color: #bfbfbf;
+}
+
+/* Mensagem de sucesso */
+.success-msg {
+    margin-top: 10px;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .menu-card {
+        width: 90%;
+        padding: 20px 15px;
+    }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ver Ocorrências e Suspensões - Diretor</title>
+  <link rel="stylesheet" href="../css/ver-ocorrencias-suspensoes-diretor.css">
+</head>
+<body class="tela-professor">
+
+  <div class="menu-container">
+    <div class="menu-card">
+      <h2>Ver Ocorrências e Suspensões</h2>
+
+      <label for="salaSelect">Selecione uma sala:</label>
+      <select id="salaSelect" class="menu-input">
+        <option value="" disabled selected>Selecione uma sala</option>
+        <option value="2NT">2 NT</option>
+        <option value="3NT">3 NT</option>
+      </select>
+
+      <!-- Ocorrências -->
+      <h3 style="margin-top: 15px;">Ocorrências</h3>
+      <div id="ocorrenciasContainer"></div>
+
+      <!-- Suspensões -->
+      <h3 style="margin-top: 25px;">Suspensões</h3>
+      <div id="suspensoesContainer"></div>
+
+      <!-- Botão voltar -->
+      <a href="menu-diretor.html" class="menu-btn sair">← Voltar</a>
+    </div>
+  </div>
+
+  <script>
+    // Segurança: só diretor acessa
+    const user = sessionStorage.getItem("usuario");
+    if (!user || JSON.parse(user).tipo !== "diretor") {
+      window.location.href = "../index.html";
+    }
+
+    const salaSelect = document.getElementById('salaSelect');
+    const ocorrenciasContainer = document.getElementById('ocorrenciasContainer');
+    const suspensoesContainer = document.getElementById('suspensoesContainer');
+
+    // Banco de exemplo
+    const ocorrenciasDB = {
+      "2NT": { "Pedro": 1, "Tgas": 0, "João": 2 },
+      "3NT": { "Millena": 0, "Murilo": 1, "Gabi": 3 }
+    };
+
+    const suspensoesDB = {
+      "2NT": { "Pedro": 0, "Tgas": 1, "João": 0 },
+      "3NT": { "Millena": 0, "Murilo": 0, "Gabi": 1 }
+    };
+
+    // Quando escolher sala
+    salaSelect.addEventListener('change', function() {
+      const sala = salaSelect.value;
+
+      ocorrenciasContainer.innerHTML = '';
+      suspensoesContainer.innerHTML = '';
+
+      if (!ocorrenciasDB[sala]) return;
+
+      // Lista de ocorrências
+      for (const aluno in ocorrenciasDB[sala]) {
+        const btn = document.createElement('button');
+        btn.textContent = `${aluno} - ${ocorrenciasDB[sala][aluno]} ocorrências`;
+        btn.classList.add('menu-btn');
+        btn.style.width = '100%';
+        btn.style.marginBottom = '0.5rem';
+        ocorrenciasContainer.appendChild(btn);
+      }
+
+      // Lista de suspensões
+      for (const aluno in suspensoesDB[sala]) {
+        const btn = document.createElement('button');
+        btn.textContent = `${aluno} - ${suspensoesDB[sala][aluno]} suspensões`;
+        btn.classList.add('menu-btn');
+        btn.style.backgroundColor = '#d11111'; // vermelho
+        btn.style.width = '100%';
+        btn.style.marginBottom = '0.5rem';
+        suspensoesContainer.appendChild(btn);
+      }
+    });
+  </script>
+</body>
+</html>
